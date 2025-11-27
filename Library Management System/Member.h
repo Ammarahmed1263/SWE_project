@@ -4,15 +4,14 @@ using namespace std;
 
 class Member {
 private:
-    inline static int nextMemberID = 0;
+    static int nextMemberID;
     int memberID;
     string name;
     string email;
 
 public:
     Member(string name, string email);
-
-    string getId();
+    int getId();
     string getName();
     string getEmail();
 };

@@ -69,14 +69,191 @@ void ConsoleMenu::showMainMenu() {
 }
 
 
-void ConsoleMenu::addBookMenu() {}
-void ConsoleMenu::removeBookMenu() {}
-void ConsoleMenu::listBooksMenu() {}
-void ConsoleMenu::searchBookMenu() {}
-void ConsoleMenu::addMemberMenu() {}
-void ConsoleMenu::removeMemberMenu() {}
-void ConsoleMenu::listMembersMenu() {}
-void ConsoleMenu::searchMemberMenu() {}
+void ConsoleMenu::addBookMenu() {
+
+    string isbn, title, author, category;
+    int totalCopies;
+    cout << "\n=== Add New Book ===\n";
+
+    cout << "Enter ISBN: "<<endl;
+    getline(cin, isbn);
+
+    cout << "Enter Title: "<<endl;
+    getline(cin, title);
+
+    cout << "Enter Author: "<<endl;
+    getline(cin, author);
+
+    cout << "Enter Category: "<<endl;
+    getline(cin, category);
+
+    cout << "Enter Total Copies: ";
+    cin >> totalCopies;
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    bool added = bookService->addBook(isbn, title, author, category, totalCopies);
+    if (added)
+        cout << "\nBook added successfully.\n";
+    else
+        cout << "\nBook already exists. Copies incremented.\n";
+    pause();
+}
+
+
+void ConsoleMenu::removeBookMenu() {
+    string isbn;
+
+    cout << "\n=== Remove Book ===\n";
+    cout << "Enter ISBN to remove: ";
+    getline(cin, isbn);
+    bool removed = bookService->removeBook(isbn);
+    if (removed)
+        cout << "Book removed successfully.\n";
+    else
+        cout << "Book not found!\n";
+    pause();
+}
+
+void ConsoleMenu::listBooksMenu() {
+
+    vector<Book> books = bookService->getAllBooks();
+    cout << "\n=== All Books ===\n";
+
+    if(books.empty())
+         cout << "No books available.\n";
+    else{
+        for(Book &b:books){
+             cout << " - " << b.getTitle()
+                 << " | ISBN: " << b.getIsbn()
+                 << " | Author: " << b.getAuthor()
+                 << " | Category: " << b.getCategory()
+                 << " | Total: " << b.getTotalCopies()
+                 << " | Available: " << b.getAvailableCopies()
+                 << "\n";
+        }
+
+
+    }
+
+}
+
+void ConsoleMenu::searchBookMenu() {
+
+    string query;
+    cout << "\n=== Search Book ===\n";
+    cout << "Enter title/author/category/ISBN: ";
+    getline(cin, query);
+    vector<Book> books=bookService->searchBooks(query);
+
+        if(books.empty())
+         cout << "No books found.\n";
+    else{
+        for(Book &b:books){
+             cout << " - " << b.getTitle()
+                 << " | ISBN: " << b.getIsbn()
+                 << " | Author: " << b.getAuthor()
+                 << " | Category: " << b.getCategory()
+                 << " | Total: " << b.getTotalCopies()
+                 << " | Available: " << b.getAvailableCopies()
+                 << "\n";
+        }
+    }
+    pause();
+}
+
+
+void ConsoleMenu::addMemberMenu() {
+     string name ,email;
+     cout << "\n=== Add New Member ===\n";
+     cout<<"Enter Name:\n";
+     getline(cin,name);
+     cout<<"Enter the Email:\n";
+     getline(cin,email);
+     bool added = memberService->addMember(name,email);
+    if (added)
+        cout << "\nMember added successfully.\n";
+    else
+        cout << "\nMember already exists (email must be unique).\n";
+    pause();
+}
+
+
+void ConsoleMenu::removeMemberMenu() {
+
+    cout << "\n=== Remove Member ===\n";
+    int id;
+    cout << "Enter Member ID to remove: ";
+    cin >> id;
+
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    bool deleted=memberService->removeMember(id);
+
+    if (deleted)
+        cout << "\nMember removed successfully.\n";
+    else
+        cout << "\nMember not found!\n";
+    pause();
+}
+
+
+void ConsoleMenu::listMembersMenu() {
+
+    cout << "\n=== List of All Members ===\n";
+
+    vector<Member> all=memberService->getAllMembers();
+
+     if (all.empty()) {
+        cout << "No members found.\n";
+        pause();
+        return;
+    }
+
+    for ( Member& m : all) {
+        cout << "------------------------------\n";
+        cout << "ID: " << m.getId() << "\n";
+        cout << "Name: " << m.getName() << "\n";
+        cout << "Email: " << m.getEmail() << "\n";
+    }
+
+    cout << "------------------------------\n";
+    pause();
+
+}
+
+
+
+void ConsoleMenu::searchMemberMenu() {
+     cout << "\n=== Search Member ===\n";
+
+      string query;
+    cout << "Enter name, email, or ID: ";
+    getline(cin, query);
+
+    vector<Member> results = memberService->searchMembers(query);
+
+    if (results.empty()) {
+        cout << "\nNo members found.\n";
+        pause();
+        return;
+    }
+
+    cout << "\n=== Search Results ===\n";
+    for ( Member& m : results) {
+        cout << "------------------------------\n";
+        cout << "ID: " << m.getId() << "\n";
+        cout << "Name: " << m.getName() << "\n";
+        cout << "Email: " << m.getEmail() << "\n";
+    }
+
+    cout << "------------------------------\n";
+    pause();
+}
+
+
+
+
+
+
+
 void ConsoleMenu::borrowBookMenu() {}
 void ConsoleMenu::returnBookMenu() {}
 void ConsoleMenu::reportAvailableBooksMenu() {}

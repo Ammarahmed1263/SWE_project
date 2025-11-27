@@ -10,8 +10,8 @@ private:
 public:
     MemberService() = default;
 
-    bool addMember(Member m);
+    bool addMember(string name,string email);
     bool removeMember(int memberID);
-    vector<Member> getAllMembers();
+    vector<Member>& getAllMembers();
     vector<Member> searchMembers(string query);
 };
