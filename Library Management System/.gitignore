@@ -1,0 +1,47 @@
+# ============================
+# Code::Blocks / C++ Projects
+# ============================
+
+# Code::Blocks project files (optional)
+# If you want to ignore these, uncomment them.
+#*.cbp
+#*.layout
+
+# ----------------------------
+# Build artifacts
+# ----------------------------
+bin/
+obj/
+*.o
+*.exe
+*.dll
+*.so
+*.a
+*.out
+
+# ----------------------------
+# Compiler cache / logs
+# ----------------------------
+*.log
+*.depend
+*.layout
+*.gch
+
+# ----------------------------
+# Windows specific
+# ----------------------------
+Thumbs.db
+Desktop.ini
+
+# ----------------------------
+# Linux / MacOS junk
+# ----------------------------
+*.swp
+*.swo
+.DS_Store
+
+# ----------------------------
+# Backup files
+# ----------------------------
+*~
+*.bak
