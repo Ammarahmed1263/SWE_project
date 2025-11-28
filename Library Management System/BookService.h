@@ -11,8 +11,8 @@ private:
 public:
     BookService() = default;
 
-    bool addBook(string isb, string title, string author, string category,  int totalCopies );
-    bool removeBook(string isbn);
+    string addBook(string isb, string title, string author, string category,  int totalCopies );
+    string removeBook(string isbn);
 
     vector<Book> &getAllBooks();
     vector<Book> searchBooks(string query);

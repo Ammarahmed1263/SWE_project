@@ -91,11 +91,8 @@ void ConsoleMenu::addBookMenu() {
     cout << "Enter Total Copies: ";
     cin >> totalCopies;
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
-    bool added = bookService->addBook(isbn, title, author, category, totalCopies);
-    if (added)
-        cout << "\nBook added successfully.\n";
-    else
-        cout << "\nBook already exists. Copies incremented.\n";
+    string message = bookService->addBook(isbn, title, author, category, totalCopies);
+    cout << message << '\n';
     pause();
 }
 
@@ -106,11 +103,8 @@ void ConsoleMenu::removeBookMenu() {
     cout << "\n=== Remove Book ===\n";
     cout << "Enter ISBN to remove: ";
     getline(cin, isbn);
-    bool removed = bookService->removeBook(isbn);
-    if (removed)
-        cout << "Book removed successfully.\n";
-    else
-        cout << "Book not found!\n";
+    string message = bookService->removeBook(isbn);
+    cout << message << '\n';
     pause();
 }
 
@@ -262,17 +256,9 @@ void ConsoleMenu::borrowBookMenu() {
     cout << "Enter Book ISBN: ";
     cin >> isbn;
 
-    bool success = borrowService->borrowBook(memberId, isbn);
+    string message = borrowService->borrowBook(memberId, isbn);
 
-    if (success) {
-        cout << "Book borrowed successfully!\n";
-    } else {
-        cout << "Borrow failed. Possible reasons:\n";
-        cout << " - Member does not exist\n";
-        cout << " - Book does not exist\n";
-        cout << " - No available copies\n";
-        cout << " - Member exceeded borrowing limit\n";
-    }
+    cout << message << '\n';
     pause();
 }
 
@@ -288,16 +274,9 @@ void ConsoleMenu::returnBookMenu() {
     cout << "Enter Book ISBN: ";
     cin >> isbn;
 
-    bool success = borrowService->returnBook(memberId, isbn);
+    string message = borrowService->returnBook(memberId, isbn);
 
-    if (success) {
-        cout << "Book returned successfully!\n";
-    } else {
-        cout << "Return failed. Possible reasons:\n";
-        cout << " - Member does not exist\n";
-        cout << " - Book does not exist\n";
-        cout << " - The member did NOT borrow this book\n";
-    }
+    cout << message << '\n';
     pause();
 }
 
