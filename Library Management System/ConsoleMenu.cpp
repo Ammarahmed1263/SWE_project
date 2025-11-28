@@ -1,6 +1,7 @@
 #include <iostream>
 #include <limits>
 #include "ConsoleMenu.h"
+#include <vector>
 
 using namespace std;
 
@@ -301,9 +302,44 @@ void ConsoleMenu::returnBookMenu() {
 }
 
 
-void ConsoleMenu::reportAvailableBooksMenu() {}
-void ConsoleMenu::reportBorrowedBooksMenu() {}
-void ConsoleMenu::reportBooksByCategoryMenu() {}
+void ConsoleMenu::reportAvailableBooksMenu() {
+    vector<string> books = reportService->getFormattedAvailableBooks();
+    if (books.empty()) {
+        cout << "No available books found.\n";
+    } else {
+        cout << "\n====== Available Books ======\n";
+        for (auto& line : books) {
+            cout << line << "\n";
+        }
+    }
+    pause();
+}
+
+void ConsoleMenu::reportBorrowedBooksMenu() {
+    vector<string> records = reportService->getFormattedBorrowedBooks();
+    if (records.empty()) {
+        cout << "No borrow records found.\n";
+    } else {
+        cout << "\n====== Borrow Records ======\n";
+        for (auto& line : records) {
+            cout << line << "\n";
+        }
+    }
+    pause();
+}
+
+void ConsoleMenu::reportBooksByCategoryMenu() {
+    vector<string> formatted = reportService->getFormattedBooksByCategory();
+    if (formatted.empty()) {
+        cout << "No books found.\n";
+    } else {
+        cout << "\n====== Books by Category ======\n";
+        for (auto& line : formatted) {
+            cout << line << "\n";
+        }
+    }
+    pause();
+}
 
 
 
