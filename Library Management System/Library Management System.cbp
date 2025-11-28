@@ -32,7 +32,27 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="Book.cpp" />
+		<Unit filename="Book.h" />
+		<Unit filename="BookService.cpp" />
+		<Unit filename="BookService.h" />
+		<Unit filename="BorrowRecord.cpp" />
+		<Unit filename="BorrowRecord.h" />
+		<Unit filename="BorrowService.cpp" />
+		<Unit filename="BorrowService.h" />
+		<Unit filename="ConsoleMenu.cpp" />
+		<Unit filename="ConsoleMenu.h" />
+		<Unit filename="Member.cpp" />
+		<Unit filename="Member.h" />
+		<Unit filename="MemberService.h" />
+		<Unit filename="MemeberService.cpp" />
+		<Unit filename="ReportService.cpp" />
+		<Unit filename="ReportService.h" />
 		<Unit filename="main.cpp" />
-		<Extensions />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+		</Extensions>
 	</Project>
 </CodeBlocks_project_file>
