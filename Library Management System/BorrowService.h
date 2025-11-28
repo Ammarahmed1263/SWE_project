@@ -15,7 +15,7 @@ private:
 public:
     BorrowService(MemberService* memberService, BookService* BookService);
 
-    bool borrowBook(int memberID, string isbn);
-    bool returnBook(int memberID, string isbn);
+    string borrowBook(int memberID, string isbn);
+    string returnBook(int memberID, string isbn);
     vector<BorrowRecord> getAllBorrowRecords();
 };

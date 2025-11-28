@@ -5,17 +5,17 @@ const int LIMIT_BORROW_BOOK_PER_MEMBER = 3;
 
 BorrowService::BorrowService(MemberService* memberService, BookService* bookService):memberService(memberService), bookService(bookService){};
 
-bool BorrowService::borrowBook(int memberID, string isbn) {
+string BorrowService::borrowBook(int memberID, string isbn) {
 
     Book* book = bookService->findBookByIsbn(isbn);
     Member* member = memberService->findMemberById(memberID);
 
 
     // book or member don't exist
-    if (!book || !member) return false;
+    if (!book || !member) return "Book or Member not found";
 
     // check if there is available copies
-    if (book->getAvailableCopies() == 0) return false;
+    if (book->getAvailableCopies() == 0) return "No available Copies";
 
     int borrowCount = 0;
     for (BorrowRecord &rec : records) {
@@ -27,23 +27,23 @@ bool BorrowService::borrowBook(int memberID, string isbn) {
     }
 
     // exceed limit
-    if (borrowCount >= LIMIT_BORROW_BOOK_PER_MEMBER) return false;
+    if (borrowCount >= LIMIT_BORROW_BOOK_PER_MEMBER) return "Borrow limit exceeded";
 
     book->decrementCopies(1);
 
     records.push_back(BorrowRecord(member, book));
 
-    return true;
+    return "Book borrowed successfully";
 }
 
 
-bool BorrowService::returnBook(int memberID, string isbn) {
+string BorrowService::returnBook(int memberID, string isbn) {
 
     Book* book = bookService->findBookByIsbn(isbn);
     Member* member = memberService->findMemberById(memberID);
 
     // the book or the member don't exist
-    if (!book || !member) return false;
+    if (!book || !member) return "Book or Member not found";
 
     for (BorrowRecord &rec : records) {
         if (rec.getBook().getIsbn() == isbn &&
@@ -52,11 +52,11 @@ bool BorrowService::returnBook(int memberID, string isbn) {
         {
             book->incrementCopies(1);
             rec.markReturned();
-            return true;
+            return "Book Returned successfully";
         }
     }
 
-    return false; // no active borrow found
+    return "The member did NOT borrow this book"; // no active borrow found
 }
 
 
