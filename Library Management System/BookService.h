@@ -14,6 +14,6 @@ public:
     bool addBook(string isb, string title, string author, string category,  int totalCopies );
     bool removeBook(string isbn);
 
-    vector<Book> getAllBooks();
+    vector<Book> &getAllBooks();
     vector<Book> searchBooks(string query);
 };
