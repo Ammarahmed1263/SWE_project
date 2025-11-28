@@ -43,3 +43,12 @@ vector<Member> MemberService::searchMembers(string query){
 
     return result;
 }
+
+
+Member* MemberService::findMemberById(int id) {
+    for (Member &m : members) {
+        if (m.getId() == id)
+            return &m;
+    }
+    return nullptr;
+}

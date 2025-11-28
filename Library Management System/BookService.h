@@ -16,4 +16,5 @@ public:
 
     vector<Book> &getAllBooks();
     vector<Book> searchBooks(string query);
+    Book* findBookByIsbn(string isbn);
 };

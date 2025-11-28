@@ -52,3 +52,11 @@ vector<Book> BookService::searchBooks(string query){
     return Vsearch;
 
 }
+
+Book* BookService::findBookByIsbn(string isbn) {
+    for (Book &b : books) {
+        if (b.getIsbn() == isbn)
+            return &b;
+    }
+    return nullptr;
+}
