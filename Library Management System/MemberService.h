@@ -14,4 +14,6 @@ public:
     bool removeMember(int memberID);
     vector<Member>& getAllMembers();
     vector<Member> searchMembers(string query);
+    Member* findMemberById(int id);
+
 };

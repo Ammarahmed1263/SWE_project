@@ -249,13 +249,58 @@ void ConsoleMenu::searchMemberMenu() {
 }
 
 
+void ConsoleMenu::borrowBookMenu() {
+    cout << "\n====== Borrow Book ======\n";
+
+    int memberId;
+    string isbn;
+
+    cout << "Enter Member ID: ";
+    cin >> memberId;
+
+    cout << "Enter Book ISBN: ";
+    cin >> isbn;
+
+    bool success = borrowService->borrowBook(memberId, isbn);
+
+    if (success) {
+        cout << "Book borrowed successfully!\n";
+    } else {
+        cout << "Borrow failed. Possible reasons:\n";
+        cout << " - Member does not exist\n";
+        cout << " - Book does not exist\n";
+        cout << " - No available copies\n";
+        cout << " - Member exceeded borrowing limit\n";
+    }
+    pause();
+}
+
+void ConsoleMenu::returnBookMenu() {
+    cout << "\n====== Return Book ======\n";
+
+    int memberId;
+    string isbn;
+
+    cout << "Enter Member ID: ";
+    cin >> memberId;
+
+    cout << "Enter Book ISBN: ";
+    cin >> isbn;
+
+    bool success = borrowService->returnBook(memberId, isbn);
+
+    if (success) {
+        cout << "Book returned successfully!\n";
+    } else {
+        cout << "Return failed. Possible reasons:\n";
+        cout << " - Member does not exist\n";
+        cout << " - Book does not exist\n";
+        cout << " - The member did NOT borrow this book\n";
+    }
+    pause();
+}
 
 
-
-
-
-void ConsoleMenu::borrowBookMenu() {}
-void ConsoleMenu::returnBookMenu() {}
 void ConsoleMenu::reportAvailableBooksMenu() {}
 void ConsoleMenu::reportBorrowedBooksMenu() {}
 void ConsoleMenu::reportBooksByCategoryMenu() {}

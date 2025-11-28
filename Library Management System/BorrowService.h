@@ -13,7 +13,7 @@ private:
 
 
 public:
-    BorrowService(MemberService* memberService, BookService* BookService):memberService(memberService), bookService(bookService){};
+    BorrowService(MemberService* memberService, BookService* BookService);
 
     bool borrowBook(int memberID, string isbn);
     bool returnBook(int memberID, string isbn);
